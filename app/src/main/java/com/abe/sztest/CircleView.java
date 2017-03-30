@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -19,40 +20,33 @@ public class CircleView extends View {
     static Random random;
     private boolean effect = false;
     private int wait = 0;
-    private TextView textView;
-    private int count = 1;
     private int game = 0;
-    private int timing = 10;
+    private int timing = 20;
     private int x;
     private int y;
-    private int r = 100;
+    private int r = 150;
 
     static {
         random = new Random(System.currentTimeMillis());
     }
 
-    public CircleView(Context context){
+    public CircleView(Context context, int timing){
         super(context);
+        this.timing = timing;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         Paint paint = new Paint();
+
         if(effect == true){
             paint.setColor(Color.WHITE);
-            canvas.drawCircle(x, y, count*r/10,paint);
-            count++;
-
-            if(count <= 11){
-                invalidate();
-            }
-
-            effect = false;
-            count = 1;
+            canvas.drawCircle(x, y, r,paint);
             invalidate();
-
+            effect = false;
         }else {
+            sleep(100);
             setRandom();
             game++;
             paint.setColor(Color.GREEN);
@@ -76,17 +70,20 @@ public class CircleView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        float xTouch = event.getX();
-        float yTouch = event.getY();
 
-        if((xTouch <= x+r/2) && (xTouch >= x-r/2) && (yTouch <= y+r/2) && (yTouch >= y-r/2)){
-            if((wait%2)==1){sleep(100);}
-            effect = true;
-            invalidate();
-        }
+        if((wait%2)==1){sleep(150);}
+        effect = true;
+        invalidate();
 
         if((game%timing)==0){wait++;}
 
         return super.onTouchEvent(event);
+    }
+
+    public void settiming(int t){
+        timing = t;
+        game = 0;
+        wait = 0;
+        effect = false;
     }
 }

@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.abe.timer1.MainActivity">
+    <item
+        android:id="@+id/graph"
+        android:orderInCategory="100"
+        android:title="10"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/save"
+        android:orderInCategory="100"
+        android:title="20"></item>
+    <item
+        android:id="@+id/exit"
+        android:orderInCategory="100"
+        android:title="30"></item>
+</menu>
