@@ -80,10 +80,4 @@ public class CircleView extends View {
         return super.onTouchEvent(event);
     }
 
-    public void settiming(int t){
-        timing = t;
-        game = 0;
-        wait = 0;
-        effect = false;
-    }
 }
